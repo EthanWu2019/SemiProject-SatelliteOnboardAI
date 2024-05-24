@@ -47,6 +47,4 @@ const appStyles = {
     padding: '10px',
   },
 };
-
-
 export default App;
