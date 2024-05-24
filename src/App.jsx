@@ -42,7 +42,7 @@ function App (){
 const appStyles = {
   content: {
     marginLeft: '-100px',
-    paddingTop: '90px', // 确保内容不被固定的标题覆盖
+    paddingTop: '85px', // 确保内容不被固定的标题覆盖
     padding: '10px',
   },
 };
