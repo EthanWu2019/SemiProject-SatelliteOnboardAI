@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './Nav.css'; // 导入CSS文件
 
+
 function Nav() {
   return (
     <nav className="nav">
