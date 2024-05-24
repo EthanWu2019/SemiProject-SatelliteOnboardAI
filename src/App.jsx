@@ -39,11 +39,11 @@ function App (){
     </Router>
   );
 };
-const appStyles = {
+ const appStyles = {
   content: {
     marginLeft: '-100px',
+    padding: '20px',
     paddingTop: '85px', // 确保内容不被固定的标题覆盖
-    padding: '10px',
   },
 };
 export default App;
