@@ -39,7 +39,6 @@ function App (){
     </Router>
   );
 };
-
 const appStyles = {
   content: {
     marginLeft: '-100px',
