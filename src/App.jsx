@@ -15,8 +15,6 @@ import CloudDetection from './pages/CloudDetection';
 import ImageCompression from './pages/ImageCompression';
 import Other from './pages/Other';
 // import './App.css';
-
-
 function App (){
   return (
     <Router>
