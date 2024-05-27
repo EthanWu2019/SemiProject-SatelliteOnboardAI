@@ -6,12 +6,33 @@ import axios from 'axios'; // 用于前端与后端通信
 
 function TargetDetection() {
   const [selectedImage, setSelectedImage] = useState(null);
+  const [imageInfo, setImageInfo] = useState({
+    name: 'original.jpg',
+    size: '1.2 MB',
+    resolution: '1920x1080',
+  });
   const [algorithm, setAlgorithm] = useState('1');
   const [outputImage, setOutputImage] = useState(null);
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     setSelectedImage(file);
+
+    // 获取文件信息
+    const name = file.name;
+    const size = (file.size / 1024 / 1024).toFixed(2) + ' MB';
+
+    // 获取图片分辨率
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const img = new Image();
+      img.onload = () => {
+        const resolution = `${img.width}x${img.height}`;
+        setImageInfo({ name, size, resolution });
+      };
+      img.src = event.target.result;
+    };
+    reader.readAsDataURL(file);
   };
 
   const handleAlgorithmChange = (e) => {
@@ -57,7 +78,7 @@ function TargetDetection() {
             <table border="1" style={styles.table}>
               <thead>
                 <tr>
-                  <th>图像名称</th>
+                  <th style={styles.tableHeader}>图像名称</th>
                   <th>图像大小</th>
                   <th>图像分辨率</th>
                   <th>图像中心坐标</th>
@@ -65,9 +86,11 @@ function TargetDetection() {
               </thead>
               <tbody>
                 <tr>
-                  <td>original.jpg</td>
-                  <td>1.2 MB</td>
-                  <td>1920x1080</td>
+                  <td style={styles.imageNameCell}>
+                    <div style={styles.imageNameContent}>{imageInfo.name}</div>
+                  </td>
+                  <td>{imageInfo.size}</td>
+                  <td>{imageInfo.resolution}</td>
                   <td>31.2304°N, 121.4737°E</td>
                 </tr>
               </tbody>
@@ -75,13 +98,6 @@ function TargetDetection() {
             <div>
               <label>输入经纬度：</label>
               <input type="text" placeholder="经纬度" />
-            </div>
-            <div>
-              <label>选择选项：</label>
-              <select>
-                <option value="option1">选项1</option>
-                <option value="option2">选项2</option>
-              </select>
             </div>
             <div>
               <label>选择图像：</label>
@@ -215,6 +231,26 @@ const styles = {
   table: {
     width: '100%',
     marginBottom: '10px'
+  },
+  tableHeader: {
+    whiteSpace: 'nowrap'
+  },
+  imageNameCell: {
+    maxWidth: '150px',
+    overflow: 'hidden',
+    position: 'relative'
+  },
+  imageNameContent: {
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    display: 'block',
+    maxWidth: '100%',
+  },
+  imageNameWrapper: {
+    overflowX: 'auto',
+    maxWidth: '100%',
+    paddingBottom: '10px'
   },
   scrollContainer: {
     overflowY: 'scroll',

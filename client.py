@@ -7,13 +7,17 @@ from werkzeug.utils import secure_filename
 import io
 from PIL import Image
 
-server_ip_port = ('172.16.100.12', 12346)
-DIR_BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+server_ip_port = ('172.16.100.12', 12345)
+DIR_BASE = os.path.dirname(os.path.abspath(__file__))
+RESULT_FOLDER = os.path.join(DIR_BASE, 'src', 'assets', 'result')
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = './uploads'
 if not os.path.exists(app.config['UPLOAD_FOLDER']):
     os.makedirs(app.config['UPLOAD_FOLDER'])
+
+if not os.path.exists(RESULT_FOLDER):
+    os.makedirs(RESULT_FOLDER)
 
 # 发送原始文件长度和ai模式给服务端
 def send_pre_info(sock, raw_file_len, ai_mode):
@@ -24,13 +28,13 @@ def send_pre_info(sock, raw_file_len, ai_mode):
     sock.send(b)
 
 def do_client_work(filepath, ai_mode):
-    # 第一步：创建一个socket
+    # 创建一个socket
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-    # 第二步：建立连接，參数是一个tuple
+    # 建立连接
     s.connect(server_ip_port)
 
-    # 第三步：发送数据
+    # 发送数据
     with open(filepath, "rb") as trans_f:
         # 发送4字节文件长度信息和1字节ai模式
         trans_f.seek(0, 2)
@@ -53,12 +57,12 @@ def do_client_work(filepath, ai_mode):
             except:
                 continue
 
-    # 第四步：接收数据
+    # 接收数据
     rlen = 0
     total_len_bytes = s.recv(4)
     total_len = int.from_bytes(total_len_bytes, byteorder='big', signed=False)
 
-    output_path = os.path.join(app.config['UPLOAD_FOLDER'], 'ai_result.jpg')
+    output_path = os.path.join(RESULT_FOLDER, 'ai_result.jpg')
     with open(output_path, 'w+b') as rcvf:
         while rlen < total_len:
             try:
@@ -69,7 +73,7 @@ def do_client_work(filepath, ai_mode):
                 print(repr(e))
                 continue
 
-    # 第五步：关闭连接
+    # 关闭连接
     s.close()
     return output_path
 
@@ -93,4 +97,4 @@ def process_image():
         return send_file(output_path, mimetype='image/jpeg')
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5001)  # 修改端口号为5001
+    app.run(debug=True, port=5002)  # 修改端口号为5001
