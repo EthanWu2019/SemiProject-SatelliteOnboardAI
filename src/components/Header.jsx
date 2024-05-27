@@ -13,7 +13,7 @@ function Header() {
 
 const headerStyles = {
   header: {
-    backgroundColor: '#003366',
+    backgroundColor: '#002244',
     padding: '10px',
     color: 'white',
     position: 'fixed',
