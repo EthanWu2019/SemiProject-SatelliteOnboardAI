@@ -2,19 +2,10 @@ import socket
 import os
 import sys
 import time
-from flask import Flask, request, jsonify, send_file
-from werkzeug.utils import secure_filename
-import io
-from PIL import Image
 
-server_ip_port = ('172.16.100.12', 12345)
+server_ip_port = ('172.16.100.12', 12346)
 DIR_BASE = os.path.dirname(os.path.abspath(__file__))
 RESULT_FOLDER = os.path.join(DIR_BASE, 'src', 'assets', 'result')
-
-app = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = './uploads'
-if not os.path.exists(app.config['UPLOAD_FOLDER']):
-    os.makedirs(app.config['UPLOAD_FOLDER'])
 
 if not os.path.exists(RESULT_FOLDER):
     os.makedirs(RESULT_FOLDER)
@@ -27,15 +18,15 @@ def send_pre_info(sock, raw_file_len, ai_mode):
     b = bytes(info)
     sock.send(b)
 
-def do_client_work(filepath, ai_mode):
+def do_client_work(image_path, ai_mode):
     # 创建一个socket
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-    # 建立连接
+    # 建立连接，参数是一个tuple
     s.connect(server_ip_port)
 
     # 发送数据
-    with open(filepath, "rb") as trans_f:
+    with open(image_path, "rb") as trans_f:
         # 发送4字节文件长度信息和1字节ai模式
         trans_f.seek(0, 2)
         total_len = trans_f.tell()
@@ -73,28 +64,10 @@ def do_client_work(filepath, ai_mode):
                 print(repr(e))
                 continue
 
-    # 关闭连接
     s.close()
     return output_path
 
-@app.route('/api/process_image', methods=['POST'])
-def process_image():
-    if 'image' not in request.files:
-        return jsonify({'error': 'No image part'}), 400
-    file = request.files['image']
-    if file.filename == '':
-        return jsonify({'error': 'No selected file'}), 400
-    if file:
-        filename = secure_filename(file.filename)
-        filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-        file.save(filepath)
-
-        algorithm = int(request.form['algorithm'])
-
-        # 调用原有的处理函数
-        output_path = do_client_work(filepath, algorithm)
-
-        return send_file(output_path, mimetype='image/jpeg')
-
-if __name__ == '__main__':
-    app.run(debug=True, port=5002)  # 修改端口号为5001
+if __name__ == "__main__":
+    image_path = sys.argv[1]
+    ai_mode = int(sys.argv[2])
+    do_client_work(image_path, ai_mode)

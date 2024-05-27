@@ -13,6 +13,7 @@ function TargetDetection() {
   });
   const [algorithm, setAlgorithm] = useState('1');
   const [outputImage, setOutputImage] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -40,21 +41,30 @@ function TargetDetection() {
   };
 
   const handleRunClick = async () => {
+    setLoading(true);
     const formData = new FormData();
     formData.append('image', selectedImage);
     formData.append('algorithm', algorithm);
 
     try {
-      const response = await axios.post('http://127.0.0.1:5000/api/process_image', formData, {
+      const response = await axios.post('http://127.0.0.1:5002/api/process_image', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
-      const blob = new Blob([response.data], { type: 'image/jpeg' });
-      const outputImageUrl = URL.createObjectURL(blob);
-      setOutputImage(outputImageUrl);
+
+      if (response.data.success) {
+        const blob = new Blob([response.data.image], { type: 'image/jpeg' });
+        const outputImageUrl = URL.createObjectURL(blob);
+        setOutputImage(outputImageUrl);
+      } else {
+        alert('处理失败');
+      }
     } catch (error) {
       console.error('Error processing image:', error);
+      alert('处理失败');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -100,6 +110,13 @@ function TargetDetection() {
               <input type="text" placeholder="经纬度" />
             </div>
             <div>
+              <label>选择选项：</label>
+              <select>
+                <option value="option1">选项1</option>
+                <option value="option2">选项2</option>
+              </select>
+            </div>
+            <div>
               <label>选择图像：</label>
               <input type="file" accept="image/*" onChange={handleImageChange} />
             </div>
@@ -115,7 +132,9 @@ function TargetDetection() {
           <div style={{ flex: 1, padding: '10px' }}>
             <h3 style={styles.title}>识别选取区</h3>
             <div style={styles.imageContainer}>
-              {outputImage ? (
+              {loading ? (
+                <p>正在处理...</p>
+              ) : outputImage ? (
                 <img src={outputImage} alt="Detection" style={styles.image} />
               ) : (
                 <div style={styles.emptyImageContainer}></div>
