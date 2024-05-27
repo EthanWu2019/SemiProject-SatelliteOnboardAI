@@ -45,28 +45,29 @@ function TargetDetection() {
     const formData = new FormData();
     formData.append('image', selectedImage);
     formData.append('algorithm', algorithm);
-
+  
     try {
       const response = await axios.post('http://127.0.0.1:5002/api/process_image', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
-
-      if (response.data.success) {
-        const blob = new Blob([response.data.image], { type: 'image/jpeg' });
+  
+      if (response.status === 200) {
+        const blob = new Blob([response.data], { type: 'image/jpeg' });
         const outputImageUrl = URL.createObjectURL(blob);
         setOutputImage(outputImageUrl);
       } else {
-        alert('处理失败');
+        alert('完全失败');
       }
     } catch (error) {
       console.error('Error processing image:', error);
-      alert('处理失败');
+      alert('各种报错');
     } finally {
       setLoading(false);
     }
   };
+  
 
   return (
     <div style={{ marginLeft: '220px', padding: '20px', position: 'relative' }}>

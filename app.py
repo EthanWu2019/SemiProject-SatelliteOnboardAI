@@ -1,6 +1,6 @@
 import os
 import subprocess
-from flask import Flask, request, jsonify, send_file
+from flask import Flask, request, jsonify, send_file, render_template_string
 from werkzeug.utils import secure_filename
 
 DIR_BASE = os.path.dirname(os.path.abspath(__file__))
@@ -15,6 +15,18 @@ if not os.path.exists(UPLOAD_FOLDER):
 
 if not os.path.exists(RESULT_FOLDER):
     os.makedirs(RESULT_FOLDER)
+
+@app.route('/')
+def index():
+    files = os.listdir(app.config['UPLOAD_FOLDER'])
+    return render_template_string("""
+        <h1>Uploaded Files</h1>
+        <ul>
+        {% for file in files %}
+            <li>{{ file }}</li>
+        {% endfor %}
+        </ul>
+    """, files=files)
 
 @app.route('/api/process_image', methods=['POST'])
 def process_image():
