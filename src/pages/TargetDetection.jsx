@@ -111,13 +111,6 @@ function TargetDetection() {
               <input type="text" placeholder="经纬度" />
             </div>
             <div>
-              <label>选择选项：</label>
-              <select>
-                <option value="option1">选项1</option>
-                <option value="option2">选项2</option>
-              </select>
-            </div>
-            <div>
               <label>选择图像：</label>
               <input type="file" accept="image/*" onChange={handleImageChange} />
             </div>

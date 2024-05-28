@@ -3,7 +3,7 @@ import os
 import sys
 import time
 
-server_ip_port = ('172.16.100.12', 12346)
+server_ip_port = ('172.16.100.12', 12345)
 DIR_BASE = os.path.dirname(os.path.abspath(__file__))
 RESULT_FOLDER = os.path.join(DIR_BASE, 'src', 'assets', 'result')
 
