@@ -47,6 +47,9 @@ function TargetDetection() {
     formData.append('algorithm', algorithm);
   
     try {
+      console.log(formData.get('image'));
+      console.log(formData.get('algorithm'));
+
       const response = await axios.post('http://127.0.0.1:5002/api/process_image', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
@@ -68,7 +71,6 @@ function TargetDetection() {
     }
   };
   
-
   return (
     <div style={{ marginLeft: '220px', padding: '20px', position: 'relative' }}>
       <BackButton />

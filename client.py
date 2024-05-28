@@ -1,7 +1,6 @@
 import socket
 import os
 import sys
-import time
 
 server_ip_port = ('172.16.100.12', 12345)
 DIR_BASE = os.path.dirname(os.path.abspath(__file__))
@@ -19,11 +18,13 @@ def send_pre_info(sock, raw_file_len, ai_mode):
     sock.send(b)
 
 def do_client_work(image_path, ai_mode):
+    print(f'Starting client work with image_path: {image_path} and ai_mode: {ai_mode}')
     # 创建一个socket
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
     # 建立连接，参数是一个tuple
     s.connect(server_ip_port)
+    print(f'Connected to server at {server_ip_port}')
 
     # 发送数据
     with open(image_path, "rb") as trans_f:
@@ -34,6 +35,7 @@ def do_client_work(image_path, ai_mode):
         trans_f.seek(0, 0)
 
         send_pre_info(s, total_len, ai_mode)
+        print(f'Sent pre info with total_len: {total_len} and ai_mode: {ai_mode}')
 
         # 发送文件内容
         slen = 0
@@ -45,13 +47,15 @@ def do_client_work(image_path, ai_mode):
                     print("send over, slen:{}".format(slen))
                     break
                 s.send(data_frm)
-            except:
+            except Exception as e:
+                print(f'Error while sending data: {repr(e)}')
                 continue
 
     # 接收数据
     rlen = 0
     total_len_bytes = s.recv(4)
     total_len = int.from_bytes(total_len_bytes, byteorder='big', signed=False)
+    print(f'Expecting to receive total_len: {total_len}')
 
     output_path = os.path.join(RESULT_FOLDER, 'ai_result.jpg')
     with open(output_path, 'w+b') as rcvf:
@@ -61,13 +65,15 @@ def do_client_work(image_path, ai_mode):
                 rlen += len(d)
                 rcvf.write(d)
             except Exception as e:
-                print(repr(e))
+                print(f'Error while receiving data: {repr(e)}')
                 continue
 
     s.close()
+    print(f'Received file saved at: {output_path}')
     return output_path
 
 if __name__ == "__main__":
     image_path = sys.argv[1]
     ai_mode = int(sys.argv[2])
+    print(f'Starting client with image_path: {image_path} and ai_mode: {ai_mode}')
     do_client_work(image_path, ai_mode)
