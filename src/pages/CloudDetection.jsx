@@ -85,7 +85,7 @@ function CloudDetection () {
     <div style={{ marginLeft: '220px', padding: '20px', position: 'relative' }}>
       <BackButton />
       <div style={{ marginTop: '60px' }}>
-        <h2>目标检测演示</h2>
+        <h2>云层判别演示</h2>
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
           {/* 第一部分：原图区 */}
           <div style={{ flex: 1, padding: '10px' }}>
@@ -164,8 +164,8 @@ function CloudDetection () {
               </thead>
               <tbody>
                 <tr>
-                  <td>exampleApp</td>
-                  <td>YOLOv5</td>
+                  <td>云层判别</td>
+                  <td>ResNet</td>
                   <td>占位符1</td>
                   <td>占位符2</td>
                 </tr>
@@ -179,13 +179,13 @@ function CloudDetection () {
               <thead>
                 <tr>
                   <th>类别</th>
-                  <th>看不清</th>
-                  <th>看不清2</th>
+                  <th>准确率</th>
+                  <th>召回率</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td>飞机</td>
+                  <td>云层</td>
                   <td>10</td>
                   <td>20</td>
                 </tr>
@@ -211,9 +211,9 @@ function CloudDetection () {
                   {Array.from({ length: 20 }, (_, index) => (
                     <tr key={index}>
                       <td>{index + 1}</td>
-                      <td>plane</td>
+                      <td>Cloud</td>
                       <td>[0,0,0,0]</td>
-                      <td>[31.2304°N, 121.4737°E]</td>
+                      <td>[W120,E120]</td>
                     </tr>
                   ))}
                 </tbody>

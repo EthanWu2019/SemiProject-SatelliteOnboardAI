@@ -164,7 +164,7 @@ function TargetDetection() {
               </thead>
               <tbody>
                 <tr>
-                  <td>exampleApp</td>
+                  <td>目标检测</td>
                   <td>YOLOv5</td>
                   <td>占位符1</td>
                   <td>占位符2</td>
@@ -179,8 +179,8 @@ function TargetDetection() {
               <thead>
                 <tr>
                   <th>类别</th>
-                  <th>看不清</th>
-                  <th>看不清2</th>
+                  <th>准确率</th>
+                  <th>召回率</th>
                 </tr>
               </thead>
               <tbody>
