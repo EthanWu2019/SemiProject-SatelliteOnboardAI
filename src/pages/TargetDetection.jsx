@@ -13,6 +13,8 @@ function TargetDetection() {
   const [algorithm, setAlgorithm] = useState('1');
   const [outputImage, setOutputImage] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [isOriginalImageZoomed, setIsOriginalImageZoomed] = useState(false);
+  const [isOutputImageZoomed, setIsOutputImageZoomed] = useState(false);
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -44,7 +46,7 @@ function TargetDetection() {
     const formData = new FormData();
     formData.append('image', selectedImage);
     formData.append('algorithm', algorithm);
-  
+
     try {
       console.log(formData.get('image'));
       console.log(formData.get('algorithm'));
@@ -55,7 +57,7 @@ function TargetDetection() {
         },
         responseType: 'blob' // 确保接收到的是二进制数据
       });
-  
+
       if (response.status === 200) {
         const blob = new Blob([response.data], { type: 'image/jpeg' });
         const outputImageUrl = URL.createObjectURL(blob);
@@ -70,7 +72,15 @@ function TargetDetection() {
       setLoading(false);
     }
   };
-  
+
+  const toggleZoomOriginalImage = () => {
+    setIsOriginalImageZoomed(!isOriginalImageZoomed);
+  };
+
+  const toggleZoomOutputImage = () => {
+    setIsOutputImageZoomed(!isOutputImageZoomed);
+  };
+
   return (
     <div style={{ marginLeft: '220px', padding: '20px', position: 'relative' }}>
       <BackButton />
@@ -80,14 +90,17 @@ function TargetDetection() {
           {/* 第一部分：原图区 */}
           <div style={{ flex: 1, padding: '10px' }}>
             <h3 style={styles.title}>原图区</h3>
-            <div style={styles.imageContainer}>
+            <div
+              style={{ ...styles.imageContainer, ...(isOriginalImageZoomed ? styles.zoomedImageContainer : {}) }}
+              onClick={toggleZoomOriginalImage}
+            >
               {selectedImage ? (
-                < img src={URL.createObjectURL(selectedImage)} alt="Selected" style={styles.image} />
+                <img src={URL.createObjectURL(selectedImage)} alt="Selected" style={styles.image} />
               ) : (
-                < img src={originalImage} alt="Original" style={styles.image} />
+                <img src={originalImage} alt="Original" style={styles.image} />
               )}
             </div>
-            <p style={styles.subtitle}>已选择图像信息</p >
+            <p style={styles.subtitle}>已选择图像信息</p>
             <table border="1" style={styles.table}>
               <thead>
                 <tr>
@@ -104,7 +117,7 @@ function TargetDetection() {
                   </td>
                   <td>{imageInfo.size}</td>
                   <td>{imageInfo.resolution}</td>
-                  <td>31.2304°N, 121.4737°E</td>
+                  <td>W120,E120</td>
                 </tr>
               </tbody>
             </table>
@@ -127,11 +140,14 @@ function TargetDetection() {
           {/* 第二部分：识别选取区 */}
           <div style={{ flex: 1, padding: '10px' }}>
             <h3 style={styles.title}>识别选取区</h3>
-            <div style={styles.imageContainer}>
+            <div
+              style={{ ...styles.imageContainer, ...(isOutputImageZoomed ? styles.zoomedImageContainer : {}) }}
+              onClick={toggleZoomOutputImage}
+            >
               {loading ? (
-                <p>正在处理...</p >
+                <p>正在处理...</p>
               ) : outputImage ? (
-                < img src={outputImage} alt="Detection" style={styles.image} />
+                <img src={outputImage} alt="Detection" style={styles.image} />
               ) : (
                 <div style={styles.emptyImageContainer}></div>
               )}
@@ -142,8 +158,8 @@ function TargetDetection() {
                 <tr>
                   <th>应用名称</th>
                   <th>使用算法</th>
-                  <th>占位符1</th>
-                  <th>占位符2</th>
+                  <th>耗时</th>
+                  <th>其他</th>
                 </tr>
               </thead>
               <tbody>
@@ -231,7 +247,21 @@ const styles = {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    border: '1px solid #ccc'
+    border: '1px solid #ccc',
+    cursor: 'pointer'
+  },
+  zoomedImageContainer: {
+    position: 'fixed',
+    top: '55%',
+    left: '55%',
+    transform: 'translate(-50%, -50%)',
+    width: '90%',
+    height: '90%',
+    zIndex: '1000',
+    backgroundColor: 'rgba(0,0,0,0.8)',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   emptyImageContainer: {
     width: '100%',
