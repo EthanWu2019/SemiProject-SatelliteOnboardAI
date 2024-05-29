@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import BackButton from '../components/BackButton';
 import originalImage from '../assets/original.jpg';
-import detectionImage from '../assets/detection.jpg';
 import axios from 'axios'; // 用于前端与后端通信
 
 function TargetDetection() {
@@ -54,6 +53,7 @@ function TargetDetection() {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
+        responseType: 'blob' // 确保接收到的是二进制数据
       });
   
       if (response.status === 200) {
@@ -82,12 +82,12 @@ function TargetDetection() {
             <h3 style={styles.title}>原图区</h3>
             <div style={styles.imageContainer}>
               {selectedImage ? (
-                <img src={URL.createObjectURL(selectedImage)} alt="Selected" style={styles.image} />
+                < img src={URL.createObjectURL(selectedImage)} alt="Selected" style={styles.image} />
               ) : (
-                <img src={originalImage} alt="Original" style={styles.image} />
+                < img src={originalImage} alt="Original" style={styles.image} />
               )}
             </div>
-            <p style={styles.subtitle}>已选择图像信息</p>
+            <p style={styles.subtitle}>已选择图像信息</p >
             <table border="1" style={styles.table}>
               <thead>
                 <tr>
@@ -129,9 +129,9 @@ function TargetDetection() {
             <h3 style={styles.title}>识别选取区</h3>
             <div style={styles.imageContainer}>
               {loading ? (
-                <p>正在处理...</p>
+                <p>正在处理...</p >
               ) : outputImage ? (
-                <img src={outputImage} alt="Detection" style={styles.image} />
+                < img src={outputImage} alt="Detection" style={styles.image} />
               ) : (
                 <div style={styles.emptyImageContainer}></div>
               )}
