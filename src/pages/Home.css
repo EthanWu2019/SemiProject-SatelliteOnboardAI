@@ -12,7 +12,7 @@
   
   .home-overlay {
     position: absolute;
-    top: 53%;
+    top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
     color: white;
