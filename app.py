@@ -3,6 +3,7 @@ import subprocess
 from flask import Flask, request, jsonify, send_file, render_template_string
 from werkzeug.utils import secure_filename
 from flask_cors import CORS  # 导入 Flask-CORS
+from flask_sqlalchemy import SQLAlchemy  # 导入 SQLAlchemy
 
 DIR_BASE = os.path.dirname(os.path.abspath(__file__))
 UPLOAD_FOLDER = os.path.join(DIR_BASE, 'uploads')
@@ -12,20 +13,32 @@ app = Flask(__name__)
 CORS(app)  # 启用 CORS
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
+# SQLite database configuration
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///mydatabase.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+db = SQLAlchemy(app)
+
 if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
 
 if not os.path.exists(RESULT_FOLDER):
     os.makedirs(RESULT_FOLDER)
 
+# Example model for the database
+class FileRecord(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    filename = db.Column(db.String(120), unique=True, nullable=False)
+    upload_time = db.Column(db.DateTime, nullable=False, default=db.func.current_timestamp())
+
 @app.route('/')
 def index():
-    files = os.listdir(app.config['UPLOAD_FOLDER'])
+    files = FileRecord.query.all()
     return render_template_string("""
         <h1>Uploaded Files</h1>
         <ul>
         {% for file in files %}
-            <li>{{ file }}</li>
+            <li>{{ file.filename }}</li>
         {% endfor %}
         </ul>
     """, files=files)
@@ -45,6 +58,11 @@ def process_image():
         filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         file.save(filepath)
         print(f'File saved at {filepath}')
+
+        # Save file record to the database
+        new_file = FileRecord(filename=filename)
+        db.session.add(new_file)
+        db.session.commit()
 
         algorithm = int(request.form['algorithm'])
         print(f'Algorithm selected: {algorithm}')
@@ -69,4 +87,7 @@ def process_image():
 
 if __name__ == '__main__':
     print('Starting Flask server...')
+    # Create the database and the tables
+    with app.app_context():
+        db.create_all()
     app.run(debug=True, port=5002)
