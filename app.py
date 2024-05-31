@@ -4,8 +4,7 @@ from flask import Flask, request, jsonify, send_file, render_template_string
 from werkzeug.utils import secure_filename
 from flask_cors import CORS  # 导入 Flask-CORS
 from flask_sqlalchemy import SQLAlchemy  # 导入 SQLAlchemy
-import pandas as pd
-
+import pandas as pd  
 DIR_BASE = os.path.dirname(os.path.abspath(__file__))
 UPLOAD_FOLDER = os.path.join(DIR_BASE, 'uploads')
 RESULT_FOLDER = os.path.join(DIR_BASE, 'src', 'assets', 'result')
