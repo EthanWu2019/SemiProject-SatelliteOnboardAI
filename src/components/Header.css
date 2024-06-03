@@ -1,0 +1,29 @@
+.header {
+  background-color: #002244;
+  padding: 10px;
+  color: white;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.h1 {
+  margin: 0;
+  padding-left: 0px; /* 确保标题不会与导航栏重叠 */
+}
+
+.link {
+  color: white;
+  text-decoration: none;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* 添加文字阴影 */
+  transition: all 0.3s ease; /* 添加过渡效果 */
+}
+
+.link:hover {
+  transform: scale(1.1); /* 鼠标悬浮时放大 */
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7); /* 鼠标悬浮时增加阴影 */
+}
+
+
