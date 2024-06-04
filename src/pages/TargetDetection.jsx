@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import BackButton from '../components/BackButton';
 import originalImage from '../assets/original.jpg';
 import axios from 'axios'; // 用于前端与后端通信
+import * as XLSX from 'xlsx';// 读取excel
 
 function TargetDetection() {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -72,6 +73,87 @@ function TargetDetection() {
       setLoading(false);
     }
   };
+  const [elapsedTime, setElapsedTime] = useState('占位符');
+  const [tableData, setTableData] = useState([]);
+  const [logData, setLogData] = useState([]);
+  const [log, setLog] = useState('');
+
+  const handleButtonClick = async () => {
+    try {
+      console.log('开始读取文件');
+      setLog('开始读取文件');
+      // 读取 result.xlsx 文件
+      const response = await fetch('/result.xlsx');
+      if (!response.ok) {
+          throw new Error(`Network response was not ok: ${response.statusText}`);
+      }
+      const arrayBuffer = await response.arrayBuffer();
+      const data = new Uint8Array(arrayBuffer);
+      const workbook = XLSX.read(data, { type: 'array' });
+
+      console.log('Excel 文件读取成功', workbook);
+      setLog(prevLog => prevLog + '\nExcel 文件读取成功');
+
+      // 数据在第一个工作表的 B1 单元格
+      const worksheet = workbook.Sheets[workbook.SheetNames[0]];
+      console.log('工作表内容', worksheet);
+      setLog(prevLog => prevLog + `\n工作表内容: ${JSON.stringify(worksheet)}`);
+      const elapsedTimeCell = worksheet['B1'];
+      const elapsedTime = elapsedTimeCell ? elapsedTimeCell.v : 'N/A';
+
+      console.log('读取的耗时数据', elapsedTime);
+      setLog(prevLog => prevLog + `\n读取的耗时数据: ${elapsedTime}`);
+      setElapsedTime(elapsedTime);
+
+      const worksheet2 = workbook.Sheets[workbook.SheetNames[1]];//更换表格
+
+      const tableData = [];
+      let i = 2;  // 数据从第2行开始
+      while (true) {
+        const indexCell = [i-1];
+        const typeCell = worksheet2[`A${i}`];
+        const locationCell = worksheet2[`B${i}`];
+        const latlongCell = worksheet2[`C${i}`];
+
+        if (!typeCell || !locationCell || !latlongCell) {
+            break;  // 当某一列的数据为空时停止读取
+        }
+
+        tableData.push({
+            index: indexCell,
+            type: typeCell.v,
+            location: locationCell.v,
+            latlong: latlongCell.v
+        });
+        i++;
+      }
+      setTableData(tableData);
+
+      const worksheet3 = workbook.Sheets[workbook.SheetNames[2]];//更换表格
+    
+      
+      const logData = [];
+          let j = 1;  // 从第一行开始读取
+          while (true) {
+              const logCell = worksheet3[`A${j}`];
+
+              if (!logCell) {
+                  break;  // 当单元格为空时停止读取
+              }
+
+            //  console.log(`读取的单元格 A${j}: ${logCell.v}`);
+              logData.push(logCell.v);
+              j++;
+          }
+          setLogData(logData);
+    } catch (error) {
+        console.error('读取 Excel 文件时出错:', error);
+        setLog(prevLog => prevLog + `\n读取 Excel 文件时出错: ${error.message}`);
+        setElapsedTime('Error');
+    }
+  };
+
+
 
   const toggleZoomOriginalImage = () => {
     setIsOriginalImageZoomed(!isOriginalImageZoomed);
@@ -166,7 +248,7 @@ function TargetDetection() {
                 <tr>
                   <td>目标检测</td>
                   <td>YOLOv5</td>
-                  <td>占位符1</td>
+                  <td>{elapsedTime}</td>
                   <td>占位符2</td>
                 </tr>
               </tbody>
@@ -176,24 +258,12 @@ function TargetDetection() {
           <div style={{ flex: 1, padding: '10px' }}>
             <h3 style={styles.title}>目标统计信息</h3>
             <table border="1" style={styles.table}>
-              <thead>
-                <tr>
-                  <th>类别</th>
-                  <th>准确率</th>
-                  <th>召回率</th>
-                </tr>
-              </thead>
               <tbody>
-                <tr>
-                  <td>飞机</td>
-                  <td>10</td>
-                  <td>20</td>
-                </tr>
-                <tr>
-                  <td>占位符</td>
-                  <td>30</td>
-                  <td>40</td>
-                </tr>
+                {logData.map((log, index) => (
+                    <tr key={index}>
+                        <td>{log}</td>
+                    </tr>
+                ))}
               </tbody>
             </table>
             <h3 style={styles.subtitle}>目标详细信息</h3>
@@ -207,21 +277,22 @@ function TargetDetection() {
                     <th>经纬度信息</th>
                   </tr>
                 </thead>
-                <tbody>
-                  {Array.from({ length: 20 }, (_, index) => (
-                    <tr key={index}>
-                      <td>{index + 1}</td>
-                      <td>plane</td>
-                      <td>[0,0,0,0]</td>
-                      <td>[31.2304°N, 121.4737°E]</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+                  <tbody>
+                    {tableData.map((row, index) => (
+                      <tr key={index}>
+                        <td>{row.index}</td>
+                        <td>{row.type}</td>
+                        <td>{row.location}</td>
+                        <td>{row.latlong}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
             </div>
             {/* 底部按钮 */}
             <div style={styles.buttonContainer}>
               <button style={styles.button} onClick={handleRunClick}>开始运行</button>
+              <button style={styles.button} onClick={handleButtonClick}>开始update</button>
               <button style={styles.button}>统计结果</button>
             </div>
           </div>
