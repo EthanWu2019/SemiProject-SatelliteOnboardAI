@@ -1,0 +1,42 @@
+.back-button {
+    background: linear-gradient(45deg, #6a11cb 0%, #2575fc 100%);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    overflow: hidden;
+    outline: none;
+    transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+  }
+  
+  .back-button:hover {
+    background: linear-gradient(45deg, #2575fc 0%, #6a11cb 100%);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transform: scale(1.05);
+  }
+  
+  .back-button:active .ripple {
+    animation: ripple 0.6s linear;
+  }
+  
+  .ripple {
+    width: 20px;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.6);
+    position: absolute;
+    border-radius: 50%;
+    transform: scale(0);
+    pointer-events: none;
+  }
+  
+  @keyframes ripple {
+    to {
+      transform: scale(15);
+      opacity: 0;
+    }
+  }
+  
