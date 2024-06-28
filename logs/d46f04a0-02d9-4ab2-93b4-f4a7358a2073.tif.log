@@ -1,0 +1,17 @@
+Starting client with image_path: D:\hangzhan\show\Ai_Platform\Ai_Platform\uploads\d46f04a0-02d9-4ab2-93b4-f4a7358a2073.tif and ai_mode: 1
+Starting client work with image_path: D:\hangzhan\show\Ai_Platform\Ai_Platform\uploads\d46f04a0-02d9-4ab2-93b4-f4a7358a2073.tif and ai_mode: 1
+Connected to server at ('172.16.100.12', 12345)
+File info.xlsx sent
+2024-06-17 17:24:56,626 - INFO - Sent Excel file
+File d46f04a0-02d9-4ab2-93b4-f4a7358a2073.tif sent
+2024-06-17 17:24:56,687 - INFO - Sent image file
+2024-06-17 17:24:56,687 - INFO - correspond file: D:\hangzhan\show\Ai_Platform\Ai_Platform\src\assets\result\ai_result.jpg
+2024-06-17 17:24:59,505 - INFO - recv len: 1957969
+2024-06-17 17:24:59,507 - INFO - back signal
+2024-06-17 17:24:59,526 - INFO - File saved to D:\hangzhan\show\Ai_Platform\Ai_Platform\src\assets\result\ai_result.jpg, 1957969/1957969
+2024-06-17 17:24:59,526 - INFO - Received result jpg file saved at: D:\hangzhan\show\Ai_Platform\Ai_Platform\src\assets\result\ai_result.jpg
+2024-06-17 17:24:59,526 - INFO - correspond file: D:\hangzhan\show\Ai_Platform\Ai_Platform\src\assets\result\result_ai_info.xlsx
+2024-06-17 17:24:59,548 - INFO - recv len: 6655
+2024-06-17 17:24:59,548 - INFO - back signal
+2024-06-17 17:24:59,548 - ERROR - [Errno 13] Permission denied: 'D:\\hangzhan\\show\\Ai_Platform\\Ai_Platform\\src\\assets\\result\\result_ai_info.xlsx'
+2024-06-17 17:24:59,548 - INFO - Received result Excel file saved at: D:\hangzhan\show\Ai_Platform\Ai_Platform\src\assets\result\result_ai_info.xlsx

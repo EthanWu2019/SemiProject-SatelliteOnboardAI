@@ -1,0 +1,21 @@
+Starting client with image_path: D:\hangzhan\show\Ai_Platform\Ai_Platform\uploads\1d091b71-6d4c-4781-96cb-5857a6ceb1ae.jpg and ai_mode: 2
+Starting client work with image_path: D:\hangzhan\show\Ai_Platform\Ai_Platform\uploads\1d091b71-6d4c-4781-96cb-5857a6ceb1ae.jpg and ai_mode: 2
+Connected to server at ('172.16.100.104', 12345)
+2024-06-20 13:07:23,343 - INFO - send size: 4962
+File info.xlsx sent
+2024-06-20 13:07:23,355 - INFO - Sent Excel file
+2024-06-20 13:07:23,355 - INFO - send size: 13064653
+File 1d091b71-6d4c-4781-96cb-5857a6ceb1ae.jpg sent
+2024-06-20 13:07:23,389 - INFO - Sent image file
+2024-06-20 13:07:23,389 - INFO - start to recv excel:
+2024-06-20 13:07:23,391 - INFO - recv file called
+2024-06-20 13:07:26,422 - INFO - recv len: 5353
+2024-06-20 13:07:26,422 - INFO - back signal
+2024-06-20 13:07:26,423 - ERROR - [Errno 13] Permission denied: 'D:\\hangzhan\\show\\Ai_Platform\\Ai_Platform\\src\\assets\\result\\result_ai_info.xlsx'
+2024-06-20 13:07:26,423 - INFO - Received result Excel file saved at: result_ai_info.xlsx
+2024-06-20 13:07:26,424 - INFO - start to recv jpg:
+2024-06-20 13:07:26,424 - INFO - recv file called
+2024-06-20 13:07:26,425 - INFO - recv len: 1347093252
+2024-06-20 13:07:26,426 - INFO - back signal
+2024-06-20 13:07:27,549 - INFO - File saved to D:\hangzhan\show\Ai_Platform\Ai_Platform\src\assets\result\ai_result.jpg, 13067856/1347093252
+2024-06-20 13:07:27,549 - INFO - Received result jpg file saved at: ai_result.jpg

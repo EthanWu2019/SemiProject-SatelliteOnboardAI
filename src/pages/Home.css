@@ -1,64 +1,153 @@
+.header {
+  z-index: 100;
+  position: relative;
+}
+
+.nav {
+  z-index: 99;
+  position: fixed; /* 确保导航栏固定在页面左侧 */
+}
+.satellite {
+  position: absolute;
+  top: -100%; /* 根据需要调整位置 */
+  left: 15%;
+  transform: translateX(-50%);
+}
+
+.floating-satellite {
+  width: 150px; /* 调整图片大小 */
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-30px);
+  }
+}
+
 .home-container {
-    margin-left: 200px;
-    padding: 20px;
-    position: relative;
-  }
-  
-  .home-image {
-    width: 102%;
-    height: auto;
-  }
-  
-  .home-overlay {
-    position: absolute;
-    top: 53%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
-    text-align: center;
-    background: rgba(0, 0, 0, 0.5);
-    padding: 20px;
-    border-radius: 10px;
-  }
-  
-  .home-overlay h1 {
-    font-size: 36px;
-    margin-bottom: 10px;
-  }
-  
-  .home-overlay p {
-    font-size: 18px;
-    margin-bottom: 20px;
-  }
-  
-  .home-sections {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-  }
-  
-  .home-section {
-    flex: 1;
-    min-width: 500px;
-    margin: 10px;
-    padding: 20px;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 10px;
-    margin-bottom: -30px;
-  }
-  
-  .home-section h2 {
-    font-size: 24px;
-    margin-bottom: 10px;
-  }
-  
-  .home-section ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .home-section ul li {
-    font-size: 16px;
-    margin-bottom: 5px;
-  }
-  
+  margin-left: 120px; /* 确保主内容不遮挡导航栏 */
+  padding-top: 20px;
+  margin-top: 80px;
+  position: relative;
+  z-index: 3;
+}
+
+.home-image {
+  width: 102%;
+  height: auto;
+}
+
+.globe {
+  position: absolute;
+  top: 0;
+  left: 0; /* 调整此值确保地球组件不遮挡导航栏 */
+  width: calc(100vw - 120px); /* 计算宽度，确保不遮挡导航栏 */
+  height: 100vh; /* 全屏高度 */
+  z-index: 1;
+  margin-left: -1000px;
+  margin-top: -0px;
+}
+.Globe-container {
+  position: absolute;
+  top: -170px; /* 调整距离底部的距离 */
+  left: -225px; /* 调整距离右侧的距离 */
+  width: 200; /* 自定义宽度 */
+  height: 300px; /* 自定义高度 */
+}
+
+.home-overlay {
+  position: absolute;
+  top: 0%;
+  left: 50%;
+  margin-top:250px;
+  margin-left:60px;
+  transform: translate(-50%, -50%);
+  color: white;
+  text-align: center;
+  background: rgba(85, 84, 84, 0.2);
+  padding: 20px;
+  border-radius: 10px;
+  z-index: 3;
+}
+
+.home-overlay h1 {
+  font-size: 60px;
+  margin-bottom: 10px;
+  margin-top: 50px;
+}
+
+.home-overlay p {
+  font-size: 18px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+}
+
+.zgkxy {
+  font-size: 40%;
+}
+
+.home-sections {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin-top: 10px;
+  z-index: 3;
+}
+
+.home-section {
+  flex: 1;
+  min-width: 500px;
+  margin: 10px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  margin-bottom: 0px;
+  margin-top: 20px;
+}
+
+.home-section h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.home-section ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.home-section ul li {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+/* Speed Control Bar CSS */
+.speed-control-bar {
+  position: fixed;
+  bottom: 20px;
+  right: 20px; /* 修改为右下角 */
+  width: 300px;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 10px;
+  border-radius: 10px;
+  z-index: 1000;
+}
+
+.speed-control-bar .control {
+  margin-bottom: 10px;
+}
+
+.speed-control-bar label {
+  color: white;
+  font-size: 14px;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.speed-control-bar input[type="range"] {
+  width: 100%;
+}

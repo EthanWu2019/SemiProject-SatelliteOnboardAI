@@ -1,0 +1,11 @@
+Starting client with image_path: D:\hangzhan\show\Ai_Platform\Ai_Platform\uploads\f2f848da-46be-47c4-bc03-0c5b759b724a.jpg and ai_mode: 2
+2024-06-21 19:25:40,101 - INFO - -----------开始发送----------
+2024-06-21 19:25:40,101 - INFO - send size: 4962
+Traceback (most recent call last):
+  File "D:\hangzhan\show\Ai_Platform\Ai_Platform\client.py", line 129, in <module>
+    do_client_work(image_path, ai_mode, device_num, ai_alg)
+  File "D:\hangzhan\show\Ai_Platform\Ai_Platform\client.py", line 101, in do_client_work
+    send_file(excel_path, s)
+  File "D:\hangzhan\show\Ai_Platform\Ai_Platform\client.py", line 53, in send_file
+    connection.recv(3)  # 等待服务器确认
+ConnectionResetError: [WinError 10054] 远程主机强迫关闭了一个现有的连接。

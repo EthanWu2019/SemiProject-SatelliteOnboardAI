@@ -1,0 +1,23 @@
+Starting client with image_path: D:\hangzhan\show\Ai_Platform\Ai_Platform\uploads\422d3c53-e0b6-422c-b582-a9bfb853b234.jpg and ai_mode: 1
+Starting client work with image_path: D:\hangzhan\show\Ai_Platform\Ai_Platform\uploads\422d3c53-e0b6-422c-b582-a9bfb853b234.jpg and ai_mode: 1
+Connected to server at ('172.16.100.104', 12345)
+File info.xlsx sent
+2024-06-19 10:22:48,979 - INFO - Sent Excel file
+File 422d3c53-e0b6-422c-b582-a9bfb853b234.jpg sent
+2024-06-19 10:22:49,025 - INFO - Sent image file
+2024-06-19 10:22:49,025 - INFO - correspond file: result_ai_info.xlsx
+Traceback (most recent call last):
+  File "D:\hangzhan\show\Ai_Platform\Ai_Platform\client.py", line 53, in receive_file
+    file_info = c_sock.recv(4)  # 接收4个字节表示文件大小
+ConnectionResetError: [WinError 10054] 远程主机强迫关闭了一个现有的连接。
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\hangzhan\show\Ai_Platform\Ai_Platform\client.py", line 119, in <module>
+    do_client_work(image_path, ai_mode, device_num, ai_alg)
+  File "D:\hangzhan\show\Ai_Platform\Ai_Platform\client.py", line 97, in do_client_work
+    receive_file(s, result_excel_path)
+  File "D:\hangzhan\show\Ai_Platform\Ai_Platform\client.py", line 53, in receive_file
+    file_info = c_sock.recv(4)  # 接收4个字节表示文件大小
+KeyboardInterrupt

@@ -1,0 +1,19 @@
+Starting client with image_path: D:\hangzhan\show\Ai_Platform\Ai_Platform\uploads\d14719b9-0f1e-4f41-9e5a-c5deed1047ba.jpg and ai_mode: 1
+2024-06-20 14:39:16,457 - INFO - -----------开始发送----------
+2024-06-20 14:39:16,458 - INFO - send size: 4960
+File info.xlsx sent
+2024-06-20 14:39:16,469 - INFO - Sent Excel file done
+2024-06-20 14:39:16,469 - INFO - send size: 2621448
+File d14719b9-0f1e-4f41-9e5a-c5deed1047ba.jpg sent
+2024-06-20 14:39:16,515 - INFO - Sent image file done
+2024-06-20 14:39:16,515 - INFO - -----------开始接收图片----------
+2024-06-20 14:39:16,515 - INFO - start to recv jpg:
+2024-06-20 14:39:16,515 - INFO - recv file called
+2024-06-20 14:39:20,414 - INFO - recv len: 2798267
+2024-06-20 14:39:20,414 - INFO - back signal
+2024-06-20 14:39:20,712 - INFO - File saved to D:\hangzhan\show\Ai_Platform\Ai_Platform\src\assets\result\ai_result.jpg, 2798267/2798267
+2024-06-20 14:39:20,712 - INFO - Received result jpg file saved at: ai_result.jpg
+2024-06-20 14:39:20,713 - INFO - -----------开始接收excel----------
+2024-06-20 14:39:20,713 - INFO - recv file called
+2024-06-20 14:39:39,368 - ERROR - [WinError 10054] 远程主机强迫关闭了一个现有的连接。
+2024-06-20 14:39:39,368 - INFO - Received result Excel file saved at: result_ai_info.xlsx

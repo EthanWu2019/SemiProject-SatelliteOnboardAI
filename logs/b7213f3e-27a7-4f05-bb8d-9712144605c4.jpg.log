@@ -1,0 +1,15 @@
+Starting client with image_path: D:\hangzhan\show\Ai_Platform\Ai_Platform\uploads\b7213f3e-27a7-4f05-bb8d-9712144605c4.jpg and ai_mode: 1
+Starting client work with image_path: D:\hangzhan\show\Ai_Platform\Ai_Platform\uploads\b7213f3e-27a7-4f05-bb8d-9712144605c4.jpg and ai_mode: 1
+Connected to server at ('172.16.100.104', 12345)
+File info.xlsx sent
+2024-06-20 11:28:53,950 - INFO - Sent Excel file
+File b7213f3e-27a7-4f05-bb8d-9712144605c4.jpg sent
+2024-06-20 11:28:53,986 - INFO - Sent image file
+2024-06-20 11:28:53,986 - INFO - correspond file: result_ai_info.xlsx
+2024-06-20 11:29:00,227 - INFO - recv len: 6506
+2024-06-20 11:29:00,227 - INFO - back signal
+2024-06-20 11:29:00,233 - INFO - File saved to D:\hangzhan\show\Ai_Platform\Ai_Platform\src\assets\result\result_ai_info.xlsx, 6510/6506
+2024-06-20 11:29:00,234 - INFO - Received result Excel file saved at: result_ai_info.xlsx
+2024-06-20 11:29:00,234 - INFO - correspond file: result_ai_info.xlsx
+2024-06-20 11:49:12,927 - ERROR - unpack requires a buffer of 4 bytes
+2024-06-20 11:49:12,928 - INFO - Received result jpg file saved at: ai_result.jpg

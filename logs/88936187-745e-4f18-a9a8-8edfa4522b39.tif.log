@@ -1,0 +1,21 @@
+Starting client with image_path: D:\hangzhan\show\Ai_Platform\Ai_Platform\uploads\88936187-745e-4f18-a9a8-8edfa4522b39.tif and ai_mode: 1
+Starting client work with image_path: D:\hangzhan\show\Ai_Platform\Ai_Platform\uploads\88936187-745e-4f18-a9a8-8edfa4522b39.tif and ai_mode: 1
+Connected to server at ('172.16.100.12', 12345)
+Traceback (most recent call last):
+  File "D:\hangzhan\show\Ai_Platform\Ai_Platform\client.py", line 118, in <module>
+    do_client_work(image_path, ai_mode, device_num, ai_alg)
+  File "D:\hangzhan\show\Ai_Platform\Ai_Platform\client.py", line 86, in do_client_work
+    create_info_excel(ai_mode, excel_path, ai_alg)
+  File "D:\hangzhan\show\Ai_Platform\Ai_Platform\client.py", line 36, in create_info_excel
+    df.to_excel(excel_path, index=False)
+  File "D:\miniconda3\envs\ai_platform\lib\site-packages\pandas\core\generic.py", line 2252, in to_excel
+    formatter.write(
+  File "D:\miniconda3\envs\ai_platform\lib\site-packages\pandas\io\formats\excel.py", line 934, in write
+    writer = ExcelWriter(  # type: ignore[abstract]
+  File "D:\miniconda3\envs\ai_platform\lib\site-packages\pandas\io\excel\_openpyxl.py", line 60, in __init__
+    super().__init__(
+  File "D:\miniconda3\envs\ai_platform\lib\site-packages\pandas\io\excel\_base.py", line 1219, in __init__
+    self._handles = get_handle(
+  File "D:\miniconda3\envs\ai_platform\lib\site-packages\pandas\io\common.py", line 868, in get_handle
+    handle = open(handle, ioargs.mode)
+PermissionError: [Errno 13] Permission denied: 'D:\\hangzhan\\show\\Ai_Platform\\Ai_Platform\\client_send\\info.xlsx'

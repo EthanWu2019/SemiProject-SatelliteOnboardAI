@@ -1,0 +1,13 @@
+Starting client with image_path: D:\hangzhan\show\Ai_Platform\Ai_Platform\uploads\0a591a54-acfa-4c18-8f32-f139014b6ef3.jpg and ai_mode: 2
+Starting client work with image_path: D:\hangzhan\show\Ai_Platform\Ai_Platform\uploads\0a591a54-acfa-4c18-8f32-f139014b6ef3.jpg and ai_mode: 2
+Connected to server at ('172.16.100.104', 12345)
+File info.xlsx sent
+2024-06-20 11:07:58,039 - INFO - Sent Excel file
+File 0a591a54-acfa-4c18-8f32-f139014b6ef3.jpg sent
+2024-06-20 11:08:33,995 - INFO - Sent image file
+2024-06-20 11:08:33,996 - INFO - correspond file: result_ai_info.xlsx
+2024-06-20 11:08:33,996 - ERROR - unpack requires a buffer of 4 bytes
+2024-06-20 11:08:33,996 - INFO - Received result Excel file saved at: result_ai_info.xlsx
+2024-06-20 11:08:33,998 - INFO - correspond file: result_ai_info.xlsx
+2024-06-20 11:08:33,998 - ERROR - [WinError 10053] 你的主机中的软件中止了一个已建立的连接。
+2024-06-20 11:08:34,000 - INFO - Received result jpg file saved at: ai_result.jpg

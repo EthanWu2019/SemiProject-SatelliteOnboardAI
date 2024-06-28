@@ -1,0 +1,136 @@
+import socket
+import os
+import sys
+import pandas as pd
+import logging
+
+server_ip_port = ('172.16.100.12', 12345)
+DIR_BASE = os.path.dirname(os.path.abspath(__file__))
+RESULT_FOLDER = os.path.join(DIR_BASE, 'src', 'assets', 'result')
+
+# 设置日志文件路径和日志级别
+log_file = os.path.join(DIR_BASE, 'client.log')
+logging.basicConfig(filename=log_file, level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+console = logging.StreamHandler()
+console.setLevel(logging.INFO)
+formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+console.setFormatter(formatter)
+logging.getLogger('').addHandler(console)
+
+if not os.path.exists(RESULT_FOLDER):
+    os.makedirs(RESULT_FOLDER)
+
+def create_info_excel(raw_file_len, ai_mode, excel_path):
+    # Create a DataFrame and save it as an Excel file
+    df = pd.DataFrame({
+        'total_len': [raw_file_len],
+        'ai_mode': [ai_mode],
+        'test': ['useless']
+    })
+    df.to_excel(excel_path, index=False)
+
+def send_excel(sock, excel_path):
+    with open(excel_path, 'rb') as excel_file:
+        while True:
+            data = excel_file.read(1024)
+            if not data:
+                break
+            sock.send(data)    
+    sock.send(b'DONE')
+    print("Sent DONE signal")
+
+# 发送图片
+def send_file(sock, file_path):
+    with open(file_path, 'rb') as file:
+        slen = 0
+        while True:
+            data = file.read(1024)
+            if not data:
+                break
+            sock.send(data)
+            slen += len(data)
+    logging.info(f"Sent file with length {slen}")
+    
+# 发送原始文件长度和ai模式给服务端
+def send_pre_info(sock, raw_file_len, ai_mode):
+    blen = raw_file_len.to_bytes(4, byteorder='big', signed=False)
+    info = bytearray(blen)
+    info.append(ai_mode)
+    b = bytes(info)
+    sock.send(b)
+
+def do_client_work(image_path, ai_mode,):
+    print(f'Starting client work with image_path: {image_path} and ai_mode: {ai_mode}')
+    # 创建一个socket
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+    # 建立连接，参数是一个tuple
+    s.connect(server_ip_port)
+    print(f'Connected to server at {server_ip_port}')
+
+    # 发送数据
+    with open(image_path, "rb") as trans_f:
+        # 发送4字节文件长度信息和1字节ai模式
+        trans_f.seek(0, 2)
+        total_len = trans_f.tell()
+        trans_f.seek(0, 0)
+
+        # 构建excel并存储本地
+        excel_path = os.path.join(DIR_BASE, 'client_send', 'info.xlsx')
+        create_info_excel(total_len, ai_mode, excel_path)
+
+        # 发送excel
+        send_excel(s, excel_path)
+ 
+        retrytime = 0
+        while retrytime < 3:
+            logging.info(f'try time {retrytime}')
+            send_file(s, image_path)
+            response = s.recv(4)
+        
+            # 如果发送成功，退出
+            if response == b'OK':
+                logging.info("File received successfully by server.")
+                break
+            
+            # 如果发送失败再发送
+            elif response == b'RETR':
+                retrytime += 1
+                logging.error("Retrying to send file...")
+            else:
+                logging.error({response})
+                logging.error("Unknown response from server.")
+                break
+
+        # 连续失败三次，退出
+        if retrytime == 3:
+            logging.error("Already try 3 time, break")
+            return
+    logging.info("try to receive")  
+    
+    # 接收数据
+    rlen = 0
+    total_len_bytes = s.recv(4)
+    total_len = int.from_bytes(total_len_bytes, byteorder='big', signed=False)
+    print(f'Expecting to receive total_len: {total_len}')
+
+    output_path = os.path.join(RESULT_FOLDER, 'ai_result.jpg')
+    with open(output_path, 'w+b') as rcvf:
+        while rlen < total_len:
+            try:
+                d = s.recv(1024)
+                rlen += len(d)
+                rcvf.write(d)
+            except Exception as e:
+                print(f'Error while receiving data: {repr(e)}')
+                continue
+
+    s.close()
+    print(f'Received file saved at: {output_path}')
+    return output_path
+
+if __name__ == "__main__":
+    image_path = sys.argv[1]
+    ai_mode = int(sys.argv[2])
+    print(f'Starting client with image_path: {image_path} and ai_mode: {ai_mode}')
+    do_client_work(image_path, ai_mode)

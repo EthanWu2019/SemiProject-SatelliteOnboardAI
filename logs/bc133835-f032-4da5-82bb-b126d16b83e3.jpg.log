@@ -1,0 +1,17 @@
+Starting client with image_path: D:\hangzhan\show\Ai_Platform\Ai_Platform\uploads\bc133835-f032-4da5-82bb-b126d16b83e3.jpg and ai_mode: 1
+Starting client work with image_path: D:\hangzhan\show\Ai_Platform\Ai_Platform\uploads\bc133835-f032-4da5-82bb-b126d16b83e3.jpg and ai_mode: 1
+Connected to server at ('172.16.100.104', 12345)
+File info.xlsx sent
+2024-06-20 11:27:18,766 - INFO - Sent Excel file
+File bc133835-f032-4da5-82bb-b126d16b83e3.jpg sent
+2024-06-20 11:27:18,811 - INFO - Sent image file
+2024-06-20 11:27:18,811 - INFO - correspond file: result_ai_info.xlsx
+2024-06-20 11:27:27,335 - INFO - recv len: 6506
+2024-06-20 11:27:27,336 - INFO - back signal
+2024-06-20 11:27:27,346 - INFO - File saved to D:\hangzhan\show\Ai_Platform\Ai_Platform\src\assets\result\ai_result.jpg, 6506/6506
+2024-06-20 11:27:27,346 - INFO - Received result jpg file saved at: ai_result.jpg
+2024-06-20 11:27:27,346 - INFO - correspond file: result_ai_info.xlsx
+2024-06-20 11:27:27,352 - INFO - recv len: 13066669
+2024-06-20 11:27:27,352 - INFO - back signal
+2024-06-20 11:27:28,505 - INFO - File saved to D:\hangzhan\show\Ai_Platform\Ai_Platform\src\assets\result\ai_result2.jpg, 13066669/13066669
+2024-06-20 11:27:28,505 - INFO - Received result jpg file saved at: D:\hangzhan\show\Ai_Platform\Ai_Platform\src\assets\result\ai_result2.jpg

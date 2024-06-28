@@ -1,0 +1,21 @@
+Starting client with image_path: D:\hangzhan\show\Ai_Platform\Ai_Platform\uploads\493d2033-d555-4da1-876b-0253bb5f3b7f.jpg and ai_mode: 1
+2024-06-26 13:35:38,751 - INFO - -----------开始发送----------
+2024-06-26 13:35:38,751 - INFO - send size: 4960
+File info.xlsx sent
+2024-06-26 13:35:38,803 - INFO - Sent Excel file done
+2024-06-26 13:35:38,804 - INFO - send size: 3419777
+File 493d2033-d555-4da1-876b-0253bb5f3b7f.jpg sent
+2024-06-26 13:35:39,093 - INFO - Sent image file done
+2024-06-26 13:35:39,093 - INFO - -----------开始接收图片----------
+2024-06-26 13:35:39,093 - INFO - start to recv jpg:
+2024-06-26 13:35:39,093 - INFO - recv file called
+2024-06-26 13:35:45,456 - INFO - recv len: 3613721
+2024-06-26 13:35:45,456 - INFO - back signal
+2024-06-26 13:35:45,792 - INFO - File saved to D:\hangzhan\show\Ai_Platform\Ai_Platform\src\assets\result\ai_result.jpg, 3613721/3613721
+2024-06-26 13:35:45,792 - INFO - Received result jpg file saved at: ai_result.jpg
+2024-06-26 13:35:45,804 - INFO - -----------开始接收excel----------
+2024-06-26 13:35:45,804 - INFO - recv file called
+2024-06-26 13:35:45,804 - INFO - recv len: 6508
+2024-06-26 13:35:45,804 - INFO - back signal
+2024-06-26 13:35:45,812 - INFO - File saved to D:\hangzhan\show\Ai_Platform\Ai_Platform\src\assets\result\result_ai_info.xlsx, 6508/6508
+2024-06-26 13:35:45,812 - INFO - Received result Excel file saved at: result_ai_info.xlsx

@@ -1,0 +1,7 @@
+Starting client with image_path: D:\hangzhan\show\Ai_Platform\Ai_Platform\uploads\233e2a63-3e94-4cac-b80d-946e688e6b6d.jpg and ai_mode: 1
+Traceback (most recent call last):
+  File "D:\hangzhan\show\Ai_Platform\Ai_Platform\client.py", line 129, in <module>
+    do_client_work(image_path, ai_mode, device_num, ai_alg)
+  File "D:\hangzhan\show\Ai_Platform\Ai_Platform\client.py", line 93, in do_client_work
+    s.connect(server_port)
+ConnectionRefusedError: [WinError 10061] 由于目标计算机积极拒绝，无法连接。

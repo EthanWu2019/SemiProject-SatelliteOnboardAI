@@ -1,0 +1,11 @@
+Starting client with image_path: D:\hangzhan\show\Ai_Platform\Ai_Platform\uploads\fcf93856-cdb9-4606-9d9c-f4c21839c291.jpg and ai_mode: 3
+2024-06-25 09:47:51,140 - INFO - -----------开始发送----------
+2024-06-25 09:47:51,140 - INFO - send size: 4963
+File info.xlsx sent
+2024-06-25 09:47:51,171 - INFO - Sent Excel file done
+2024-06-25 09:47:51,172 - INFO - send size: 13064653
+File fcf93856-cdb9-4606-9d9c-f4c21839c291.jpg sent
+2024-06-25 09:47:52,404 - INFO - Sent image file done
+2024-06-25 09:47:52,405 - INFO - -----------开始接收图片----------
+2024-06-25 09:47:52,405 - INFO - start to recv jpg:
+2024-06-25 09:47:52,405 - INFO - recv file called

@@ -1,0 +1,55 @@
+.speed-control-bar {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 200px;
+    height: 40px;
+    background: rgba(0, 0, 0, 0.2); /* 默认较低透明度 */
+    padding: 10px;
+    border-radius: 10px;
+    z-index: 1000;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 1s ease, opacity 0.3s ease, height 0.3s ease, width 0.3s ease; /* 平滑过渡效果 */
+    opacity: 0.3;
+  }
+  
+  .speed-control-bar.hovered {
+    background: rgba(0, 0, 0, 0.7); /* 悬停时较高透明度 */
+    height: 100px;
+    width: 200px;
+    opacity: 1;
+  }
+  
+  .control-label {
+    font-size: 18px;
+    transition: font-size 1s ease, transform 0.3s ease; /* 文字大小和位置过渡效果 */
+  }
+  
+  .speed-control-bar.hovered .control-label {
+    font-size: 14px;
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .speed-control-bar .control {
+    margin-top: 30px; /* 确保在悬浮时内容不会重叠 */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .speed-control-bar label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .speed-control-bar input[type="range"] {
+    width: 100%;
+  }
+  

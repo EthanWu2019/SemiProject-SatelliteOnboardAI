@@ -1,0 +1,17 @@
+Starting client with image_path: D:\hangzhan\show\Ai_Platform\Ai_Platform\uploads\b970c001-bec4-44a1-bcc7-7b8a89e60cf1.jpg and ai_mode: 2
+2024-06-21 15:11:05,356 - INFO - -----------开始发送----------
+2024-06-21 15:11:05,357 - INFO - send size: 4962
+File info.xlsx sent
+2024-06-21 15:11:05,403 - INFO - Sent Excel file done
+2024-06-21 15:11:05,403 - INFO - send size: 13064653
+File b970c001-bec4-44a1-bcc7-7b8a89e60cf1.jpg sent
+2024-06-21 15:11:06,545 - INFO - Sent image file done
+2024-06-21 15:11:06,545 - INFO - -----------开始接收图片----------
+2024-06-21 15:11:06,546 - INFO - start to recv jpg:
+2024-06-21 15:11:06,546 - INFO - recv file called
+2024-06-21 15:17:41,920 - ERROR - unpack requires a buffer of 4 bytes
+2024-06-21 15:17:41,920 - INFO - Received result jpg file saved at: ai_result.jpg
+2024-06-21 15:17:41,920 - INFO - -----------开始接收excel----------
+2024-06-21 15:17:41,920 - INFO - recv file called
+2024-06-21 15:17:41,922 - ERROR - unpack requires a buffer of 4 bytes
+2024-06-21 15:17:41,922 - INFO - Received result Excel file saved at: result_ai_info.xlsx

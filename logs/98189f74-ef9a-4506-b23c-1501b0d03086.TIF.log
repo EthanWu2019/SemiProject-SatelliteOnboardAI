@@ -1,0 +1,13 @@
+Starting client with image_path: D:\hangzhan\show\Ai_Platform\Ai_Platform\uploads\98189f74-ef9a-4506-b23c-1501b0d03086.TIF and ai_mode: 1
+Starting client work with image_path: D:\hangzhan\show\Ai_Platform\Ai_Platform\uploads\98189f74-ef9a-4506-b23c-1501b0d03086.TIF and ai_mode: 1
+Connected to server at ('172.16.100.104', 12345)
+File info.xlsx sent
+2024-06-19 10:20:35,237 - INFO - Sent Excel file
+File 98189f74-ef9a-4506-b23c-1501b0d03086.TIF sent
+2024-06-19 10:20:35,327 - INFO - Sent image file
+2024-06-19 10:20:35,327 - INFO - correspond file: result_ai_info.xlsx
+2024-06-19 10:22:29,419 - ERROR - [WinError 10054] 远程主机强迫关闭了一个现有的连接。
+2024-06-19 10:22:29,420 - INFO - Received result Excel file saved at: result_ai_info.xlsx
+2024-06-19 10:22:29,420 - INFO - correspond file: result_ai_info.xlsx
+2024-06-19 10:22:29,420 - ERROR - [WinError 10054] 远程主机强迫关闭了一个现有的连接。
+2024-06-19 10:22:29,420 - INFO - Received result jpg file saved at: ai_result.jpg
